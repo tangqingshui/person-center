@@ -4,3 +4,11 @@
   top: 50%;
   transform: translate(-50%,-50%);
 }
+
+@mixin self-fill($position: absolute) {
+  position: $position;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

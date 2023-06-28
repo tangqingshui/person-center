@@ -11,7 +11,7 @@ export default {
     },
     size: {
       type: Number,
-      default: 250,
+      default: 200,
     },
   }
 }
@@ -22,5 +22,6 @@ export default {
   border-radius: 50%;
   object-fit: cover;
   font-size: 0;
+  display: block;
 }
 </style>

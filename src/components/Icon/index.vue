@@ -14,12 +14,14 @@ const iconTypeMap = {
 
 export default {
   props:{
-    type: String,
-    require: true,
+    type: {
+      type: String,
+      default: 'arrowLeft'
+    },
   },
   computed: {
     iconClass() {
-      return iconTypeMap[this.type]
+      return iconTypeMap[this.type];
     }
   }
 }
