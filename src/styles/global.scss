@@ -1,0 +1,9 @@
+@import './var.scss';
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    color: $primary;
+  }
+}

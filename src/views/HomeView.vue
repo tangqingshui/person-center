@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <pager :current="current" :total="400" @changePage="n => current = n"></pager>
+    <empty />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Pager from '@/components/Pager';
+import Empty from '@/components/Empty'
 
 export default {
+  components: { Pager,  Empty },
   name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      current: 1
+    }
+  },
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  position: relative;
+  height: 500px;
+}
+</style>
