@@ -20,15 +20,36 @@ export const children = [
     component: () => import('@/views/Blog'),
     exact: false,
   },
-
+  {
+    path: 'home',
+    name: 'home',
+    component: () => import('@/views/Home'),
+  },
+  {
+    path: '/',
+    redirect: '/home'
+  },
 ]
 export const routes = [
   {
     path: '/',
-    name: 'home',
-    component: () => import('@/views/Home.vue'),
+    component: () => import('@/views/index.vue'),
     children
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login'),
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404.vue'),
+  },
+  {
+    path: '*',//匹配未定义的路由
+    redirect: '/404'//重定向
+  }
 ]
 
 

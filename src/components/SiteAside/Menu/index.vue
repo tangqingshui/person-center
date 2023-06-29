@@ -1,7 +1,7 @@
 <template>
   <div class="menu-container">
     <!-- 命名路由直接使用name跳转 -->
-    <router-link
+    <!-- <router-link
       v-for="item in list"
       :key="item.name"
       :to="{name: item.name, query:{name:item.name}}"
@@ -9,7 +9,16 @@
     >
       <Icon />
       <span>{{ item.title }}</span>
-    </router-link>
+    </router-link> -->
+    <div
+      v-for="item in list"
+      :key="item.name"
+      @click="clickMenuItem(item)"
+      :class="{activeMenu: activeMenu === item.name}"
+    >
+      <Icon />
+      <span>{{ item.title }}</span>
+    </div>
   </div>
 </template>
 
@@ -27,9 +36,14 @@ export default {
   },
   data() {
     return {
+      activeMenu: this.$route.name
     };
   },
   methods: {
+    clickMenuItem(item) {
+      this.activeMenu = item.name;
+      this.$router.push({name: item.name, query:{name:item.name}})
+    }
   },
 };
 </script>
@@ -39,12 +53,16 @@ export default {
 .menu-container {
   color: $gray;
   margin: 24px 0;
-  a {
+  div {
     padding:0 20px;
     display: flex;
     align-items: center;
     height: 45px;
-    &.router-link-active {
+    // &.router-link-active {
+    //   background: $dark;
+    // }
+    
+    &.activeMenu {
       background: $dark;
     }
 
