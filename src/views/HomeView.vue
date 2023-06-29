@@ -1,10 +1,17 @@
 <template>
-  <div class="home">
-    <pager :current="current" :total="400" @changePage="n => current = n"></pager>
-    <empty />
-    <div  class="site-aside">
-      <site-aside></site-aside>
-    </div>
+  <div class="home-container">
+    <Layout>
+      <template #left>
+        <div class="left">
+          <site-aside></site-aside>
+        </div>
+      </template>
+      <keep-alive v-if="$route.meta.keepAlive">
+        <router-view />
+      </keep-alive>
+      <router-view v-else />
+    </Layout>
+
   </div>
 </template>
 
@@ -12,9 +19,10 @@
 import Pager from '@/components/Pager';
 import Empty from '@/components/Empty'
 import SiteAside from '@/components/SiteAside'
+import Layout from '@/components/Layout'
 
 export default {
-  components: { Pager,  Empty,  SiteAside},
+  components: { Pager, Empty, SiteAside, Layout },
   name: 'HomeView',
   data() {
     return {
@@ -25,11 +33,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
-  position: relative;
-}
-.site-aside {
-  width: 300px;
-  height: 900px;
+.home-container {
+  width: 100%;
+  height: 100%;
+
+  .left {
+    width: 300px;
+    height: 100%;
+  }
 }
 </style>
