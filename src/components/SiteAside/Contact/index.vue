@@ -37,7 +37,7 @@ export default {
   li {
     height: $itemHeight;
     line-height: $itemHeight;
-    padding-top: 14px;
+    padding:14px 20px 0 20px;
     position: relative;
     &:hover {
       .pop {
@@ -57,7 +57,7 @@ export default {
   }
   .pop {
     position: absolute;
-    left: 0;
+    left: 20px;
     bottom: $itemHeight + 14px;
     padding: 10px 15px;
     background: #fff;

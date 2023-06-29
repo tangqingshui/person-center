@@ -1,16 +1,15 @@
 <template>
   <div class="menu-container">
-    <a
+    <!-- 命名路由直接使用name跳转 -->
+    <router-link
       v-for="item in list"
-      :key="item.link"
-      :href="item.link"
-      :class="{
-        selected: isSelected(item),
-      }"
+      :key="item.name"
+      :to="{name: item.name, query:{name:item.name}}"
+      :exact="item.exact !== false"
     >
       <Icon />
       <span>{{ item.title }}</span>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -28,19 +27,9 @@ export default {
   },
   data() {
     return {
-
     };
   },
   methods: {
-    isSelected(item) {
-      var link = item.link.toLowerCase(); // 菜单的链接地址
-      var curPathname = location.pathname.toLowerCase(); // 当前浏览器的访问路径
-      if (item.startWith) {
-        return curPathname.startsWith(link);
-      } else {
-        return curPathname === link;
-      }
-    },
   },
 };
 </script>
@@ -51,12 +40,13 @@ export default {
   color: $gray;
   margin: 24px 0;
   a {
-    &.selected {
-      background: $dark;
-    }
+    padding:0 20px;
     display: flex;
     align-items: center;
     height: 45px;
+    &.router-link-active {
+      background: $dark;
+    }
 
     &:hover {
       color: #fff;
