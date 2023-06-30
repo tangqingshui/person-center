@@ -6,6 +6,9 @@ import store from './store'
 // 引入全局css
 import './styles/global.scss'
 
+import { showMessage } from "./utils";
+Vue.prototype.$showMessage = showMessage;
+
 Vue.config.productionTip = false
 
 new Vue({

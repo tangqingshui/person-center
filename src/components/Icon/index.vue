@@ -9,7 +9,18 @@ const iconTypeMap = {
   ellipsis: 'icon-ellipsis',
   doubleRight: 'icon-double-right',
   doubleLeft: 'icon-double-left',
-  empty:'icon-empty'
+  empty:'icon-empty',
+  home: 'icon-home',
+  github: 'icon-github',
+  message: 'icon-message_light',
+  about: 'icon-aboutme',
+  blog: 'icon-blog',
+  email: 'icon-email',
+  project: 'icon-PROJECT',
+  info: 'icon-information',
+  error: 'icon-closed',
+  success: 'icon-success',
+  warn: 'icon-warn'
 }
 
 export default {
@@ -28,5 +39,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "//at.alicdn.com/t/c/font_4141208_fnt6v4njlqc.css";
+@import "//at.alicdn.com/t/c/font_4141208_l36qh58uqf.css";
 </style>

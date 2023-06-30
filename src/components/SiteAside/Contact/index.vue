@@ -1,8 +1,8 @@
 <template>
   <ul class="contact-container">
-    <li v-for="item in list" :key="item.desc">
+    <li v-for="item in list" :key="item.icon">
       <a href="#">
-        <Icon :type="item.type"></Icon>
+        <Icon :type="item.icon"></Icon>
         <span> {{ item.desc }}</span>
       </a>
       <div class="pop">
@@ -52,7 +52,7 @@ export default {
     font-size: 14px;
   }
   .icon-container {
-    font-size: 14px;
+    font-size: 20px;
     margin-right: 8px;
   }
   .pop {

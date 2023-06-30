@@ -16,7 +16,7 @@
       @click="clickMenuItem(item)"
       :class="{activeMenu: activeMenu === item.name}"
     >
-      <Icon />
+      <Icon :type="item.icon"/>
       <span>{{ item.title }}</span>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
   methods: {
     clickMenuItem(item) {
       this.activeMenu = item.name;
-      this.$router.push({name: item.name, query:{name:item.name}})
+      this.$router.push({name: item.name},() => {})
     }
   },
 };
@@ -70,7 +70,7 @@ export default {
       color: #fff;
     }
     .icon-container {
-      font-size: 14px;
+      font-size: 20px;
       margin-right: 8px;
     }
   }

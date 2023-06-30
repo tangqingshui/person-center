@@ -1,7 +1,7 @@
 <template>
   <div class="site-aside-container">
-    <Avatar url="http://mdrs.yuanjin.tech/FgMwAPYq17So9nwVH44ltDHo7u3c" />
-    <h1 class="title">龙傲天的小窝</h1>
+    <Avatar :url="userImg" />
+    <h1 class="title">清水</h1>
     <Menu :list="menus"/>
     <Contact :list="contacts"/>
   </div>
@@ -11,6 +11,7 @@
 import Avatar from "@/components/Avatar";
 import Menu from "./Menu";
 import Contact from "./Contact";
+
 export default {
   components: {
     Avatar,
@@ -21,11 +22,13 @@ export default {
     return {
       contacts: [
         {
-        desc: '1223423423423'},
+         desc: 'tangQingShui',
+         icon: "github",
+        },
         {
-        desc: '122342342423'},
-        {
-        desc: '1223423423'}
+          desc: '912718496@qq.com',
+          icon: 'email'
+        },
       ],
       menus: [
         {
@@ -46,15 +49,16 @@ export default {
         },
         {
           name: "project",
-          title: "项目&效果",
-          icon: "code",
+          title: "demo",
+          icon: "project",
         },
         {
           name: "message",
           title: "留言板",
-          icon: "chat",
+          icon: "message",
         },
       ],
+      userImg: require('@/assets/user.jpg'),
     }
   }
 };
