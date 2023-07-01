@@ -12,9 +12,9 @@ const arr = [];
  * @param {HTMLElement} container 容器，消息会显示到该容器的正中；如果不传，则显示到页面正中
  */
 export default function(options = {}) {
-  const { content='', type='info', duration=80000, container=document.body } = options;
+  let { content='', type='info', duration=2000, container } = options;
   // 创建消息元素
-  const div = document.createElement("div");
+  let div = document.createElement("div");
   const iconDom = getComponentRootDom(Icon, {
     type,
     class: 'a'
@@ -24,10 +24,16 @@ export default function(options = {}) {
   // 设置样式
   const typeClassName = styles[`message-${type}`]; //类型样式名
   div.className = `${styles.message} ${typeClassName}`;
-  // 容器的position是否改动过
-  if (getComputedStyle(container).position === "static") {
-    container.style.position = "relative";
+
+  // 只有container存在才设置定位
+  if(container) {
+    // 容器的position是否改动过
+    if (getComputedStyle(container).position === "static") {
+      container.style.position = "relative";
+    }
   }
+  container = container || document.body;
+
   // 将div加入到容器中
   container.appendChild(div);
   // 浏览器强行渲染
@@ -45,6 +51,7 @@ export default function(options = {}) {
       "transitionend",
       function() {
         div.remove();
+        div = null;
         // 运行回调函数
         options.callback && options.callback();
       },
