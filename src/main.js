@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './apis'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { showMessage } from "./utils";
+import './mock';
+// import { getBanner } from './apis'
 
 // 引入全局css
 import './styles/global.scss'
 
-import { showMessage } from "./utils";
 Vue.prototype.$showMessage = showMessage;
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,

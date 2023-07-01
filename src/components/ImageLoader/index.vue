@@ -1,5 +1,5 @@
 <template>
-  <div class="image-loader">
+  <div class="image-loader-container">
     <img v-if="!everythingDone" class="placeholder" :src="placeholder" alt="" />
     <img
       @load="onLoad"
@@ -23,7 +23,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 500,
+      default: 200,
     },
   },
   data() {
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/styles/mixin.scss";
+@import "~@/styles/mixins.scss";
 .image-loader-container {
   width: 100%;
   height: 100%;

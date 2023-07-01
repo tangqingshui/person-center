@@ -20,7 +20,9 @@ const iconTypeMap = {
   info: 'icon-information',
   error: 'icon-closed',
   success: 'icon-success',
-  warn: 'icon-warn'
+  warn: 'icon-warn',
+  arrowUp:'icon-arrowup',
+  arrowDown:'icon-arrow-down'
 }
 
 export default {
@@ -39,5 +41,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "//at.alicdn.com/t/c/font_4141208_l36qh58uqf.css";
+@import "//at.alicdn.com/t/c/font_4141208_1kelkbpptoo.css";
 </style>

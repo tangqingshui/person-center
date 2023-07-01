@@ -9,18 +9,19 @@ import { showMessage } from "@/utils";
 const ins = axios.create({});
 
 ins.interceptors.request.use(req => {
-  console.log(req);
+  console.log(req, '请求');
   return req;
 })
 
 ins.interceptors.response.use(res => {
+  console.log(res, '响应');
   if (res.data.code !== 0) {
     showMessage({
       content: res.data.msg,
       type: "error",
       duration: 1500,
     });
-    return null;
+    throw res.data;
   }
   return res.data.data;
 })
