@@ -1,6 +1,6 @@
 <template>
  <!--  轮播图其实就是利用了根节点溢出隐藏，然后通过根节点的宽高和当前索引算出容器要移动的距离通过改变定位或外边距或平移就可以实现了 -->
-  <div class="home-container" ref="container" @wheel="onWheel">
+  <div class="home-container" ref="container" @wheel="onWheel" v-loading="loading">
     <ul
       class="carousel-container"
       :style="{
@@ -53,10 +53,11 @@ export default {
       index: 1, // 当前显示的是第几张轮播图
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在滚动中
+      loading: false,
     };
   },
   async created() {
-    this.banners = await getBanners();
+    this.getBanners();
   },
   computed: {
     translateY() {
@@ -84,6 +85,16 @@ export default {
         // 往下滚动
         this.switching = true;
         this.index++;
+      }
+    },
+    async getBanners() {
+      try {
+        this.loading = true;
+        this.banners = await getBanners();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loading = false;
       }
     }
   },

@@ -33,6 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 .views-container {
+  width: 100%;
+  height: 100%;
   .left {
     width: 300px;
     height: 100%;

@@ -73,7 +73,7 @@ export default {
       if (page < 1 || page > this.pageNumber || page === this.current) {
         return;
       }
-      this.$emit('changePage', page);
+      this.$emit('pageChange', page);
     }
   }
 }

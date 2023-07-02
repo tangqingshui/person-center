@@ -23,7 +23,8 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/mixins.scss";
 .layout-container {
-  @include self-fill(fixed);
+  width: 100%;
+  height: 100%;
   display: flex;
   .main {
     flex: 1;

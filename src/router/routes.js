@@ -20,6 +20,11 @@ export const children = [
     component: () => import('@/views/Blog'),
     exact: false,
   },
+  { 
+    name: "categoryBlog", 
+    path: "/article/cate/:categoryId", 
+    component: () => import('@/views/Blog'), 
+  },
   {
     path: 'home',
     name: 'home',

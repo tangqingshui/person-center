@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import { showMessage } from "./utils";
+import './directives'
 import './mock';
 // import { getBanner } from './apis'
 
