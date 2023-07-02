@@ -17,6 +17,8 @@
 
 <script>
 import ImageLoader from "@/components/ImageLoader";
+import {TextAnimation} from "@/utils";
+
 export default {
   props: ["carousel",'isActive'],
   components: {
@@ -24,13 +26,13 @@ export default {
   },
   data() {
     return {
-      titleWidth: 0,
-      descWidth: 0,
       isLoadDone: false,
       containerSize: null, // 外层容器的尺寸
       innerSize: null, // 里层图片的尺寸
       mouseX: 0, // 鼠标的横坐标
       mouseY: 0, // 鼠标的纵坐标
+      titleAnimation:  new TextAnimation(),
+      descAnimation:  new TextAnimation()
     };
   },
   computed: {
@@ -57,20 +59,12 @@ export default {
   methods: {
   // 调用该方法，显示文字
   showWords() {
-    this.$refs.title.style.opacity = 1;
-    this.$refs.title.style.width = 0;
-    // 强制让浏览器渲染一次
-    this.$refs.title.clientWidth; // reflow
-    this.$refs.title.style.transition = "1s";
-    this.$refs.title.style.width = this.titleWidth + "px";
-
-    // 描述也是一样
-    this.$refs.desc.style.opacity = 1;
-    this.$refs.desc.style.width = 0;
-    // 强制让浏览器渲染一次
-    this.$refs.desc.clientWidth; // reflow
-    this.$refs.desc.style.transition = "2s 1s";
-    this.$refs.desc.style.width = this.descWidth + "px";
+    this.titleAnimation.show();
+    this.descAnimation.show(2, 1);
+  },
+  hiddenWords() {
+    this.titleAnimation.hidden();
+    this.descAnimation.hidden();
   },
   onLoad() {
     this.isLoadDone = true;
@@ -104,16 +98,13 @@ export default {
       if(val && this.isLoadDone) {
         this.showWords();
       }else {
-        this.$refs.title.style.opacity = 0;
-        this.$refs.title.style.width = 0;
-        this.$refs.desc.style.opacity = 0;
-        this.$refs.desc.style.width = 0;
+        this.hiddenWords();
       }
     }
   },
   mounted() {
-    this.titleWidth = this.$refs.title.clientWidth;
-    this.descWidth = this.$refs.desc.clientWidth;
+    this.titleAnimation.init(this.$refs.title);
+    this.descAnimation.init(this.$refs.desc);
     this.setSize();
     this.mouseX = this.center.x;
     this.mouseY = this.center.y;
