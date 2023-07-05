@@ -22,6 +22,7 @@
 export default {
   name: "RightList",
   props: {
+    // [ {name:"xxx", isSelect:true, children:[ {name:"yyy", isSelect: false} ] } ]
     list: {
       type: Array,
       default: () => [],

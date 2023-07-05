@@ -1,21 +1,44 @@
 <template>
-  <div class="blog-list-container" ref="container" v-loading="loading">
+  <div class="blog-list-container" ref="mainContainer" v-loading="isLoading">
     <ul>
-      <li v-for="item in blogData.rows" :key="item.id">
+      <li v-for="item in data.rows" :key="item.id">
         <div class="thumb" v-if="item.thumb">
-          <a href="">
-            <img :src="item.thumb" :alt="item.title" :title="item.title" />
-          </a>
+          <RouterLink
+            :to="{
+              name: 'blogDetail',
+              params: {
+                id: item.id,
+              },
+            }"
+          >
+            <img v-lazy="item.thumb" :alt="item.title" :title="item.title" />
+          </RouterLink>
         </div>
         <div class="main">
-          <a href="">
+          <RouterLink
+            :to="{
+              name: 'blogDetail',
+              params: {
+                id: item.id,
+              },
+            }"
+          >
             <h2>{{ item.title }}</h2>
-          </a>
+          </RouterLink>
           <div class="aside">
             <span>日期：{{ formatDate(item.createDate) }}</span>
             <span>浏览：{{ item.scanNumber }}</span>
             <span>评论：{{ item.commentNumber }}</span>
-            <a href="/article/cate/8" class="">{{ item.category.name }}</a>
+            <RouterLink
+              :to="{
+                name: 'categoryBlog',
+                params: {
+                  categoryId: item.category.id,
+                },
+              }"
+            >
+              {{ item.category.name }}
+            </RouterLink>
           </div>
           <div class="desc">
             {{ item.description }}
@@ -25,9 +48,9 @@
     </ul>
     <!-- 分页放到这里 -->
     <Pager
-      v-if="blogData.total"
+      v-if="data.total"
       :current="routeInfo.page"
-      :total="blogData.total"
+      :total="data.total"
       :limit="routeInfo.limit"
       :visibleNumber="10"
       @pageChange="handlePageChange"
@@ -37,17 +60,14 @@
 
 <script>
 import Pager from "@/components/Pager";
+import fetchData from "@/mixins/fetchData.js";
 import { getBlogs } from "@/apis";
 import { formatDate } from "@/utils";
+import mainScroll from "@/mixins/mainScroll.js";
 export default {
+  mixins: [fetchData({}), mainScroll("mainContainer")],
   components: {
     Pager,
-  },
-  data() {
-    return {
-      blogData: {},
-      loading: false,
-    }
   },
   computed: {
     // 获取路由信息
@@ -65,17 +85,11 @@ export default {
   methods: {
     formatDate,
     async fetchData() {
-      try {
-        this.loading = true;
-        this.blogData = await getBlogs(
-          this.routeInfo.page,
-          this.routeInfo.limit,
-          this.routeInfo.categoryId
-        );
-        this.loading = false;
-      } catch (error) {
-        this.loading = false;
-      }
+      return await getBlogs(
+        this.routeInfo.page,
+        this.routeInfo.limit,
+        this.routeInfo.categoryId
+      );
     },
     handlePageChange(newPage) {
       const query = {
@@ -85,11 +99,13 @@ export default {
       // 跳转到 当前的分类id  当前的页容量  newPage的页码
       if (this.routeInfo.categoryId === -1) {
         // 当前没有分类
+        // /article?page=${newPage}&limit=${this.routeInfo.limit}
         this.$router.push({
           name: "blog",
           query,
         });
       } else {
+        // /article/cate/${this.routeInfo.categoryId}?page=${newPage}&limit=${this.routeInfo.limit}
         this.$router.push({
           name: "categoryBlog",
           query,
@@ -102,14 +118,13 @@ export default {
   },
   watch: {
     async $route() {
+      this.isLoading = true;
       // 滚动高度为0
-      this.$refs.container.scrollTop = 0;
-      this.fetchData();
+      this.$refs.mainContainer.scrollTop = 0;
+      this.data = await this.fetchData();
+      this.isLoading = false;
     },
   },
-  created() {
-    this.fetchData();
-  }
 };
 </script>
 

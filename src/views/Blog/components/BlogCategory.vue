@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-category-container" v-loading="loading">
+  <div class="blog-category-container" v-loading="isLoading">
     <h2>文章分类</h2>
     <RightList :list="list" @select="handleSelect" />
   </div>
@@ -7,16 +7,12 @@
 
 <script>
 import RightList from "./RightList";
+import fetchData from "@/mixins/fetchData.js";
 import { getBlogCategories } from "@/apis";
 export default {
+  mixins: [fetchData([])],
   components: {
     RightList,
-  },
-  data() {
-    return {
-      categoryList: [],
-      loading: false,
-    }
   },
   computed: {
     categoryId() {
@@ -26,14 +22,14 @@ export default {
       return +this.$route.query.limit || 10;
     },
     list() {
-      const totalArticleCount = this.categoryList.reduce(
+      const totalArticleCount = this.data.reduce(
         (a, b) => a + b.articleCount,
         0
       );
 
       const result = [
         { name: "全部", id: -1, articleCount: totalArticleCount },
-        ...this.categoryList,
+        ...this.data,
       ];
       return result.map((it) => ({
         ...it,
@@ -44,13 +40,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      try {
-        this.loading = true;
-        this.categoryList = await getBlogCategories();
-        this.loading = false;
-      } catch (error) {
-        this.loading = false;
-      }
+      return await getBlogCategories();
     },
     handleSelect(item) {
       const query = {
@@ -74,9 +64,6 @@ export default {
       }
     },
   },
-  created() {
-    this.fetchData();
-  }
 };
 </script>
 

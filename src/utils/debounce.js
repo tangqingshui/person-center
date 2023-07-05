@@ -1,10 +1,10 @@
 export default function(callback, timer = 2000) {
   let timerId = null;
 
-  return () => {
+  return (...args) => {
     clearTimeout(timerId);
     timerId = setTimeout(() => { 
-      callback();
+      callback(...args);
      },  timer)
   }
 }

@@ -20,11 +20,15 @@ export const children = [
     component: () => import('@/views/Blog'),
     exact: false,
   },
-  { 
-    name: "categoryBlog", 
-    path: "/article/cate/:categoryId", 
-    component: () => import('@/views/Blog'), 
+  {
+    name: "categoryBlog",
+    path: "/article/cate/:categoryId",
+    component: () => import('@/views/Blog'),
   },
+  { 
+    name: "blogDetail", 
+    path: "/article/:id", 
+    component: () => import('@/views/Blog/Detail.vue'), },
   {
     path: 'home',
     name: 'home',

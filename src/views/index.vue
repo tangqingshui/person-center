@@ -11,6 +11,7 @@
       </keep-alive>
       <router-view v-else />
     </Layout>
+    <ToTop />
   </div>
 </template>
 
@@ -19,9 +20,10 @@ import Pager from '@/components/Pager';
 import Empty from '@/components/Empty'
 import SiteAside from '@/components/SiteAside'
 import Layout from '@/components/Layout'
+import ToTop from "@/components/ToTop";
 
 export default {
-  components: { Pager, Empty, SiteAside, Layout },
+  components: { Pager, Empty, SiteAside, Layout, ToTop },
   name: 'HomeView',
   data() {
     return {

@@ -1,4 +1,6 @@
 import Vue from "vue";
 import loading from './loading'
-console.log(11);
+import lazy from './lazy'
+
 Vue.directive('loading', loading);
+Vue.directive('lazy', lazy);
