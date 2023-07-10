@@ -45,3 +45,19 @@ export function getComments(blogid, page = 1, limit = 10) {
     },
   });
 }
+
+export const getUserInfo = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => { 
+      Math.random() > 0.5 ? resolve('user') : reject(null); 
+    }, 4000)
+  })
+}
+
+export const loginOut = () => {
+  return  new Promise((resolve, reject) => {
+    setTimeout(() => { 
+      Math.random() > 0.5 ? resolve(true) : reject(null); 
+    }, 4000)
+  })
+}

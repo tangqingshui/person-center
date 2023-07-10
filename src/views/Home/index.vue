@@ -1,6 +1,7 @@
 <template>
  <!--  轮播图其实就是利用了根节点溢出隐藏，然后通过根节点的宽高和当前索引算出容器要移动的距离通过改变定位或外边距或平移就可以实现了 -->
   <div class="home-container" ref="container" @wheel="onWheel" v-loading="loading">
+    <input :key="key" />
     <ul
       class="carousel-container"
       :style="{
@@ -54,6 +55,7 @@ export default {
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在滚动中
       loading: false,
+      key: 1,
     };
   },
   async created() {

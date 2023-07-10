@@ -19,6 +19,9 @@ export const children = [
     name: 'blog',
     component: () => import('@/views/Blog'),
     exact: false,
+    meta: {
+      auth: true,
+    }
   },
   {
     name: "categoryBlog",
@@ -49,6 +52,11 @@ export const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login'),
+  },
+  {
+    path: '/loginLoading',
+    name: 'loginLoading',
+    component: () => import('@/views/Login/Loading.vue'),
   },
   {
     path: '/404',

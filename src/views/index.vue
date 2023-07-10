@@ -27,7 +27,7 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      current: 1
+      current: 1,
     }
   },
 }
