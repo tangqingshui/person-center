@@ -1,9 +1,11 @@
 <template>
   <div class="site-aside-container">
-    <Avatar :url="userImg" />
-    <h1 class="title">清水</h1>
-    <Menu :list="menus"/>
-    <Contact :list="contacts"/>
+    <template v-if="data">
+      <Avatar :url="userImg" />
+      <h1 class="title">{{ data.siteTitle }}</h1>
+      <Menu :list="data.menus"/>
+      <Contact :list="data.contacts"/>
+    </template>
   </div>
 </template>
 
@@ -11,6 +13,7 @@
 import Avatar from "@/components/Avatar";
 import Menu from "./Menu";
 import Contact from "./Contact";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -20,47 +23,10 @@ export default {
   },
   data() {
     return {
-      contacts: [
-        {
-         desc: 'tangQingShui',
-         icon: "github",
-        },
-        {
-          desc: '912718496@qq.com',
-          icon: 'email'
-        },
-      ],
-      menus: [
-        {
-          name: "home",
-          title: "首页",
-          icon: "home",
-        },
-        {
-          name: "blog",
-          title: "文章",
-          icon: "blog",
-          startWith: true, // 只要当前路径以link开头，当前菜单就是选中的
-        },
-        {
-          name: "about",
-          title: "关于我",
-          icon: "about",
-        },
-        {
-          name: "project",
-          title: "demo",
-          icon: "project",
-        },
-        {
-          name: "message",
-          title: "留言板",
-          icon: "message",
-        },
-      ],
       userImg: require('@/assets/user.jpg'),
     }
-  }
+  },
+  computed: mapState("setting", ["data"]),
 };
 </script>
 

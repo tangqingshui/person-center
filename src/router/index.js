@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { routes } from './routes'
 import store from '@/store';
+import { titleController } from "@/utils";
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next) => {
+  if (to.meta.title) {
+    titleController.setRouteTitle(to.meta.title);
+  }
   if (to.meta.auth) {
     // 需要鉴权，进入鉴权流程
     const status = store.getters["loginUser/status"];

@@ -5,7 +5,8 @@ import store from './store';
 import { showMessage } from "./utils";
 import './directives'
 import './mock';
-// import { getBanner } from './apis'
+
+store.dispatch("setting/fetchSetting");
 
 // 引入全局css
 import './styles/global.scss'

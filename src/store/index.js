@@ -2,11 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import loginUser from './loginUser';
+import banner from "./banner";
+import setting from "./setting";
+import about from "./about";
+import project from "./project";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  name: true,
   state: {
   },
   getters: {
@@ -17,5 +20,10 @@ export default new Vuex.Store({
   },
   modules: {
     loginUser,
-  }
+    banner,
+    setting,
+    about,
+    project
+  },
+  strict: true,
 })

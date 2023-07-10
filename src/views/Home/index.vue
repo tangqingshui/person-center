@@ -37,10 +37,10 @@
 </template>
 
 <script>
-import { getBanners } from "@/apis";
 import CarouselItem from "./CarouselItem";
 import Icon from "@/components/Icon";
 import { debounce } from '@/utils'
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -50,21 +50,20 @@ export default {
   data() {
     this.debounceGetClientHeight = debounce(this.getClientHeight, 1000);
     return {
-      banners: [],
       index: 1, // 当前显示的是第几张轮播图
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在滚动中
-      loading: false,
       key: 1,
     };
   },
-  async created() {
-    this.getBanners();
+  created() {
+    this.$store.dispatch("banner/fetchBanner");
   },
   computed: {
     translateY() {
       return -this.index * this.containerHeight + "px";
     },
+    ...mapState("banner", ["loading", "banners"]),
   },
   methods: {
     // 切换轮播图
@@ -89,16 +88,6 @@ export default {
         this.index++;
       }
     },
-    async getBanners() {
-      try {
-        this.loading = true;
-        this.banners = await getBanners();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.loading = false;
-      }
-    }
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;

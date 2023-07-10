@@ -1,3 +1,31 @@
+import "nprogress/nprogress.css";
+import { start, done, configure } from "nprogress";
+
+configure({
+  trickleSpeed: 20,
+  showSpinner: false,
+});
+
+function delay(duration) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, duration);
+  });
+}
+
+function getPageComponent(pageCompResolver) {
+  return async () => {
+    start();
+    if (process.env.NODE_ENV === "development") {
+      await delay(2000);
+    }
+    const comp = await pageCompResolver();
+    done();
+    return comp;
+  };
+}
+
 export const children = [
   {
     path: 'about',
@@ -46,7 +74,15 @@ export const routes = [
   {
     path: '/',
     component: () => import('@/views/index.vue'),
-    children
+    children: children.map(i => {
+      if(i.component) {
+        return {
+          ...i,
+          component:  getPageComponent(i.component)
+        }
+      }
+      return i;
+    })
   },
   {
     path: '/login',

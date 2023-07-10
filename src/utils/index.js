@@ -7,3 +7,5 @@ export { default as debounce } from "./debounce";
 export { default as TextAnimation } from "./textAnimation";
 
 export { default as formatDate } from "./formatDate";
+
+export { default as titleController } from "./titleController";

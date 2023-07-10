@@ -61,3 +61,30 @@ export const loginOut = () => {
     }, 4000)
   })
 }
+
+export function getSetting() {
+  return get("/api/setting");
+}
+
+export  function getMessages(page = 1, limit = 10) {
+  return get("/api/message", {
+    params: {
+      page,
+      limit,
+    },
+  });
+}
+
+export function postMessage(msgInfo) {
+  return post("/api/message", msgInfo);
+}
+
+export function getAbout() {
+  return get("/api/about");
+}
+
+export function getProjects() {
+  return get("/api/project");
+}
+
+
